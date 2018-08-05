@@ -5,10 +5,11 @@
             "type": "al",
             "request": "launch",
             "name": "Your own server",
-            "server": "http://localhost:7049",
-            "serverInstance": "DynamicsNAV110",
+            "server": "http://localhost",
+            "port": 7149,
+            "serverInstance": "deploy",
             "authentication": "Windows",
-            "startupObjectId": 51000
+            "startupObjectId": 50100
         }
     ]
 }
