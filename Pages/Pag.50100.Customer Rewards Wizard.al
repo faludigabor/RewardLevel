@@ -1,9 +1,8 @@
 page 50100 "Customer Rewards Wizard" 
 { 
     // Specifies that this page will be a navigate page. 
-    PageType = NavigatePage; 
+    PageType = NavigatePage;
     Caption = 'Customer Rewards assisted setup guide'; 
-
     layout 
     { 
         area(content) 
@@ -21,14 +20,13 @@ page 50100 "Customer Rewards Wizard"
                     ShowCaption = false; 
                 } 
             } 
-
             group(FirstPage) 
             { 
                 Caption = ''; 
                 Visible = FirstPageVisible; 
-
                 group("Welcome") 
                 { 
+
                     Caption = 'Welcome'; 
                     Visible = FirstPageVisible; 
 
@@ -37,7 +35,6 @@ page 50100 "Customer Rewards Wizard"
                         Caption = ''; 
                         InstructionalText = 'This Customer Rewards extension is a sample extension. It adds rewards tiers support for Customers.'; 
                         Visible = FirstPageVisible; 
-
                         field(Spacer1; '') 
                         { 
                             ApplicationArea = All; 
@@ -46,7 +43,6 @@ page 50100 "Customer Rewards Wizard"
                             MultiLine = true; 
                         } 
                     } 
-
                     group("Terms") 
                     { 
                         Caption = 'Terms of Use'; 
@@ -63,7 +59,6 @@ page 50100 "Customer Rewards Wizard"
                     group(Terms2) 
                     { 
                         Caption = ''; 
-
                         field(EnableFeature; EnableCustomerRewards) 
                         { 
                             ApplicationArea = All; 
@@ -84,12 +79,10 @@ page 50100 "Customer Rewards Wizard"
             { 
                 Caption = ''; 
                 Visible = SecondPageVisible; 
-
                 group("Activation") 
                 { 
                     Caption = 'Activation'; 
                     Visible = SecondPageVisible; 
-
                     field(Spacer2; '') 
                     { 
                         ApplicationArea = All; 
@@ -103,7 +96,6 @@ page 50100 "Customer Rewards Wizard"
                         Caption = ''; 
                         InstructionalText = 'Enter your 14 digit activation code to continue'; 
                         Visible = SecondPageVisible; 
-
                         field(Activationcode; ActivationCode) 
                         { 
                             ApplicationArea = All; 
@@ -116,6 +108,7 @@ page 50100 "Customer Rewards Wizard"
 
             group(FinalPage) 
             { 
+
                 Caption = ''; 
                 Visible = FinalPageVisible; 
 
@@ -134,17 +127,16 @@ page 50100 "Customer Rewards Wizard"
             } 
         } 
     } 
-
     actions 
     { 
-        area(Processing) 
+        area(Processing)
         { 
             action(ActionBack) 
             { 
                 ApplicationArea = All; 
                 Caption = 'Back'; 
                 Enabled = BackEnabled; 
-                Visible = BackEnabled; 
+                Visible = BackEnabled;
                 Image = PreviousRecord; 
                 InFooterBar = true; 
 
@@ -153,7 +145,6 @@ page 50100 "Customer Rewards Wizard"
                     NextStep(true); 
                 end; 
             } 
-
             action(ActionNext) 
             { 
                 ApplicationArea = All; 
@@ -183,11 +174,9 @@ page 50100 "Customer Rewards Wizard"
                     CustomerRewardsExtMgt: Codeunit "Customer Rewards Ext. Mgt."; 
                 begin 
                     if ActivationCode = '' then 
-                        Error('Activation code cannot be blank.'); 
-
+                        Error('Activation code cannot be blank.');
                     if Text.StrLen(ActivationCode) <> 14 then 
                         Error('Activation code must have 14 digits.'); 
-
                     if CustomerRewardsExtMgt.ActivateCustomerRewards(ActivationCode) then 
                         NextStep(false) 
                     else 
@@ -199,7 +188,7 @@ page 50100 "Customer Rewards Wizard"
             { 
                 ApplicationArea = All; 
                 Caption = 'Finish'; 
-                Enabled = FinalPageVisible; 
+                Enabled = FinalPageVisible;
                 Image = Approve; 
                 InFooterBar = true; 
 
@@ -229,10 +218,8 @@ page 50100 "Customer Rewards Wizard"
         case Step of 
         Step::First : 
           ShowFirstPage; 
-
         Step::Second : 
           ShowSecondPage; 
-
         Step::Finish : 
           ShowFinalPage; 
         END; 
@@ -271,7 +258,7 @@ page 50100 "Customer Rewards Wizard"
         SecondPageVisible := true; 
         FinishEnabled := false; 
         BackEnabled := true; 
-        NextEnabled := false; 
+        NextEnabled := false;
         ActivateEnabled := true; 
     end; 
 
